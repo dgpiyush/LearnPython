@@ -17,5 +17,9 @@
 12. [String](11-string/README.md)
 13. [Python Modules](12-python-modules/README.md)
 14. [Python Packages](13-python-packages/README.md)
+15. [Python OOPs](14-python-oops/README.md)
+16. [Python Exception Handling](15-python-exception-handling/README.md)
+
+
 
 
