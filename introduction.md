@@ -33,4 +33,4 @@ Python supports multiple programming paradigms, including object-oriented, imper
 
 - **Garbage Collection:** Python's automatic memory management (garbage collection) simplifies memory handling for developers.
 
-## Contents
+
