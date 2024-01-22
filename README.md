@@ -1,7 +1,8 @@
 # LearnPython
 
-<!-- numberd list  -->
+## Table of Contents
 
+0. [Python Introduction](./introduction.md)
 1. [Input and Output](input-output/README.md)
 2. [Variables](variables/README.md)
 3. [Operators](operators/README.md)
