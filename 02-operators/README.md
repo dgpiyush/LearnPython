@@ -160,3 +160,90 @@ print(x >> y)  # Output: 0
 
 
 
+
+
+# Operator Precedence in Python
+
+Operator precedence defines the order in which operators are applied in an expression. Understanding precedence is crucial for writing accurate and predictable code.
+
+## Precedence Order:
+
+
+| Precedence | Operators                          | Description                                   |
+|------------|------------------------------------|-----------------------------------------------|
+| 1          | `()`                               | Parentheses (grouping)                        |
+| 2          | `**`                               | Exponentiation                                |
+| 3          | `+x`, `-x`, `~x`                   | Unary plus, Unary minus, Bitwise NOT          |
+| 4          | `*, /, //, %`                      | Multiplication, Division, Floor division, Modulus |
+| 5          | `+, -`                             | Addition, Subtraction                         |
+| 6          | `<<, >>`                           | Bitwise shift operators                       |
+| 7          | `&`                                | Bitwise AND                                   |
+| 8          | `^`                                | Bitwise XOR                                   |
+| 9          | `\|`                               | Bitwise OR                                    |
+| 10         | `==, !=, >, >=, <, <=, is, is not, in, not in` | Comparisons, Identity, Membership operators |
+| 11         | `not`                              | Logical NOT                                   |
+| 12         | `and`                              | Logical AND                                   |
+| 13         | `or`                               | Logical OR      
+
+
+## Example of Operator Precedence:
+
+
+<!-- Example of arithmetic operator precedence -->
+
+```python
+
+
+#expression one 
+
+expression = (2 + 3) * 4 
+print(expression)  # Output: 20
+
+#explain 
+## used operators *,+ 
+## * have more priority than +  so first * will be executed and then + 
+## but we can use parenthesis to change the order of operation, parenthesis have highest priority
+
+
+#expression two
+
+expression = 2 + 3 * 4 
+print(expression)  # Output: 14
+
+#explain 
+## used operators *,+ 
+## * have more priority than +  so first * will be executed and then +
+
+
+
+#expression three
+
+expression = (2 + 3) * 4 - 5 
+print(expression)  # Output: 15
+
+#explain 
+## used operators *,+,- 
+## 2 + 3 is in parenthesis so it will be executed first then * and then - 
+
+
+# expression four
+
+expression = 2 + (3 * 4) - 5 
+print(expression)  # Output: 14
+
+#explain 
+## used operators *,+,- 
+## 3 * 4 is in parenthesis so it will be executed first then * and then -
+
+
+
+
+
+
+
+
+
+```
+
+
+
