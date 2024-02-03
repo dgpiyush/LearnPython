@@ -46,7 +46,6 @@ def right_triangle2(row):
         
         print()
 
-
 def pyramid(row):
     for i in range(1, row+1): 
         # space
@@ -76,14 +75,14 @@ def square(row):
         
         print()
 
-
 def left_triangle3(row):
     left_triangle1(row)
     left_triangle2(row-1)
 
-
 def right_triangle3(row):
     right_triangle1(row)
     right_triangle2(row-1)
+
+
 
 
