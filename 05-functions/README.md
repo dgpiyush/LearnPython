@@ -54,6 +54,7 @@ def my_function(parameter1, parameter2):
 ## 5. Default Parameters
 
 Default parameters are used to set a default value for a parameter if it is not provided when the function is called.
+NOTE: Default parameters must be at the end of the parameter list. after the Non-default parameters
 
 ```python
 def my_function(parameter1, parameter2=10):
@@ -63,7 +64,9 @@ def my_function(parameter1, parameter2=10):
 
 ## 6. Keyword Arguments
 
-Keyword arguments are arguments that are passed to a function in the order they are defined.
+Keyword arguments are arguments that are passed to a function in the order they are defined. 
+They are used to specify the order of the arguments when calling the function.
+
 
 
 ```python
@@ -87,9 +90,18 @@ def my_function(parameter1, parameter2):
 
 ```
 
+## 8. Args and Kwargs
+
+Args and kwargs are used to pass a variable number of arguments to a function.
+
+```python
+def my_function(*args, **kwargs):
+    print(args)
+    print(kwargs)
+```
 
 
-## 8. Docstrings
+## 9. Docstrings
 
 Docstrings are used to document functions, classes, and modules.
 
@@ -108,7 +120,7 @@ def my_function(parameter1, parameter2):
 ```
 
 
-## 9. Recursion
+## 10. Recursion
 
 A recursive function is a function that calls itself.
 
@@ -121,7 +133,7 @@ def my_function(parameter1, parameter2):
         return my_function(parameter1, parameter2)
 ```
 
-## 10. Lambda Functions / Anonymous Functions
+## 11. Lambda Functions / Anonymous Functions
 
 Lambda functions are anonymous functions that can be created without a name. They are used to create short, one-line functions that can be passed as arguments.
 
@@ -129,4 +141,6 @@ Lambda functions are anonymous functions that can be created without a name. The
 ```python
 lambda parameter1, parameter2: result
 ```
+
+
 

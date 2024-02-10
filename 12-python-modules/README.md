@@ -53,14 +53,36 @@ import <module_name>
 
 ```python
 from <module_name> import <function_name>
+
+# eg: 
+# single function
+from math import pi
+
+# more than one function
+from math import sin, cos
 ```
 
 
 ```python
 from <module_name> import *
+
+# eg:
+
+# all functions
+from math import *
 ```
 
 
+<!-- module name alias -->
+
+
+```python
+import <module_name> as <module_alias>
+
+
+# eg: 
+import math as m
+```
 
 
 
