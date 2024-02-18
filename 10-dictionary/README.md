@@ -2,7 +2,7 @@
 
 ### Overview
 - A Python dictionary is a collection of key-value pairs.
-- Dictionaries are unordered, changeable (mutable), and do not allow duplicates of keys.
+- Dictionaries are ordered, changeable (mutable), and do not allow duplicates of keys.
 
 ### Creating a Dictionary
 - A dictionary is created by placing a comma-separated list of key-value pairs within curly braces `{}`, with keys and values separated by colons.
