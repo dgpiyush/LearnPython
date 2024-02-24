@@ -1,47 +1,41 @@
-## Python Tuple Details
+## Python Set Details
 
 ### Overview
-- A tuple is a collection which is ordered and immutable.
-- Tuples are written with round brackets `()`.
+- A set is a collection which is unordered, mutable, and does not allow duplicate elements.
+- Sets are written with curly braces `{}`.
 
-### Creating a Tuple
-- A tuple can be created by placing all the items (elements) inside parentheses `()`, separated by commas.
+### Creating a Set
+- A set can be created by placing all the items (elements) inside curly braces `{}`, separated by commas.
+- Alternatively, the `set()` constructor can be used to create a set.
 
 ### Accessing Elements
-- Elements can be accessed by their index, similar to lists, using the syntax `tuple[index]`.
+- As sets are unordered, you cannot access items by index.
+- You can loop through the set using a `for` loop to access its elements.
 
-### Slicing
-- Slicing can be done with the syntax `tuple[start:stop:step]`.
+### Adding Elements
+- Use the `.add(element)` method to add a single element to a set.
+- Use the `.update([element1, element2, ...])` method to add multiple elements to a set.
 
-### Immutable Nature
-- Once a tuple is created, you cannot change its values. Tuples are read-only, or immutable.
+### Removing Elements
+- The `.remove(element)` method removes the specified element from the set but raises a KeyError if the element is not found.
+- The `.discard(element)` method removes the specified element from the set without raising an error if the element is not found.
+- The `.pop()` method removes and returns an arbitrary element from the set. If the set is empty, a KeyError is raised.
+- The `.clear()` method empties the set.
 
-### Single Element Tuples
-- To create a tuple with only one item, you need to include a comma after the item, even though there is only one value.
 
-### Concatenation
-- You can concatenate tuples using the `+` operator to combine them.
+### Operations
+- Set union can be performed with `set1 | set2` or `set1.union(set2)`.
+- Set intersection can be performed with `set1 & set2` or `set1.intersection(set2)`.
+- Set difference can be performed with `set1 - set2` or `set1.difference(set2)`.
+- Symmetric difference (elements in either set, but not in both) can be performed with `set1 ^ set2` or `set1.symmetric_difference(set2)`.
 
-### Nesting
-- Tuples can contain other tuples, lists, or dictionaries.
+### Checking Membership
+- To check if an item is in a set, use the `in` keyword.
 
-### Tuple Packing and Unpacking
-- Tuple packing is when a tuple is created without using parentheses.
-- Tuple unpacking is when the values of a tuple are assigned to a sequence of variables in a single assignment.
+### Set Comprehension
+- Set comprehension is a concise way to create sets. The syntax is `{expression for item in iterable if condition}`.
 
-example:
-```python
-my_tuple = (1, 2, 3)
-x, y, z = my_tuple
-# packing
-my_tuple = 1, 2, 3
-# unpacking
-x, y, z = my_tuple
-```
-
-### Built-in Tuple Functions
-- `len(tuple)`: Gives the total length of the tuple.
-- `max(tuple)`: Returns the item from the tuple with the max value.
-- `min(tuple)`: Returns the item from the tuple with the min value.
-- `tuple(iterable)`: Converts an iterable (list, string, set, etc.) to a tuple.
-
+### Built-in Set Functions
+- `len(set)`: Gives the total number of elements in a set.
+- `max(set)`: Returns the largest element of the set.
+- `min(set)`: Returns the smallest element of the set.

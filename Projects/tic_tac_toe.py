@@ -30,6 +30,14 @@ def make_move(board, position, player):
         return True
     return False
 
+
+
+def position_to_index(position):
+    position = int(position) - 1  # Subtract 1 to convert position to zero-based index
+    row = position // 3  # Calculate the row index
+    col = position % 3   # Calculate the column index
+    return row, col
+
 def tic_tac_toe():
     board = [[" " for _ in range(3)] for _ in range(3)]
 
@@ -43,8 +51,8 @@ def tic_tac_toe():
     while True:
         print_board(board)
         try:
-            position = input(f"Player {current_player}, enter your move as row,col (e.g., 1,2): ")
-            row, col = map(int, position.split(","))
+            position = input(f"Player {current_player}, enter your move as position: ")
+            row, col = position_to_index(position)
             if (row, col) not in get_free_positions(board):
                 print("This position is already taken or out of bounds. Choose another one.")
                 continue
@@ -52,7 +60,7 @@ def tic_tac_toe():
             print("Invalid input. Please enter row and column as two numbers separated by a comma.")
             continue
 
-        if make_move(board, (row - 1, col - 1), current_player):
+        if make_move(board, (row , col ), current_player):
             if check_winner(board, current_player):
                 winner = current_player
                 break
