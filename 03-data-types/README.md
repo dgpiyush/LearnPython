@@ -1,143 +1,63 @@
-<!-- Python Data Types -->
-
 # Data Types in Python
 
 ## Data Types
 
-* Numaric  -> int, float, complex
+### 1. Numeric Types
+- **int**: Whole numbers, positive or negative, without decimals.
+- **float**: Numbers containing one or more decimals.
+- **complex**: Numbers with a real and imaginary part.
 
-* Sequence  -> list, tuple, range, string
+### 2. Sequence Types
+- **list**: Ordered, changeable collection with duplicate elements.
+- **tuple**: Ordered, immutable collection with duplicate elements.
+- **range**: Immutable sequence of numbers.
+- **string**: Ordered collection of characters.
 
-* Boolean -> True, False
+### 3. Boolean Types
+- **bool**: Represents truth values `True` or `False`.
 
-* Set 
+### 4. Set Types
+- **set**: Unordered, mutable collection with no duplicate elements.
+- **frozenset**: Immutable variant of a set.
 
-* Dictionary
+### 5. Mapping Types
+- **dictionary**: Unordered, mutable collection of key-value pairs.
 
-* Binary -> bytes, bytearray, memoryview
+### 6. Binary Types
+- **bytes**: Immutable sequence of bytes.
+- **bytearray**: Mutable sequence of bytes.
+- **memoryview**: Memory view into a bytes or bytearray object.
 
+---
 
+## Comparison of Sequence Types
+| Type   | Syntax  | Ordered | Mutable | Duplicates | Example            |
+|--------|---------|---------|---------|------------|--------------------|
+| List   | `[]`    | Yes     | Yes     | Allowed    | `[1, 2, 2, 3]`    |
+| Tuple  | `()`    | Yes     | No      | Allowed    | `(1, 2, 2, 3)`     |
+| Range  | -       | Yes     | No      | Not applicable | `range(5)`       |
+| String | -       | Yes     | No      | Allowed    | `'Hello, World!'` |
 
+## Comparison of Mapping and Set Types
+| Type      | Syntax  | Ordered | Mutable | Duplicates | Example                                          |
+|-----------|---------|---------|---------|------------|--------------------------------------------------|
+| Dictionary| `{}`    | As of Python 3.7, Yes | Yes | No keys, but values can be duplicated | `{'key1': 1, 'key2': 2, 'key3': 3}` |
+| Set       | `{}`    | No      | Yes     | Not allowed| `{1, 2, 3}`                                      |
 
-### Numaric Types
+---
 
-
-<!-- explain int with example  -->
-
-
-1. int  -> int is a whole number, positive or negative, without decimals, of unlimited length.
-
-```python
-x = 10
-print(x)  # Output: 10
-```
-
-2. float  -> float is a number, positive or negative, containing one or more decimals.
-
-```python
-x = 10.5
-print(x)  # Output: 10.5
-```
-
-3. complex -> complex numbers are written with a lowercase j as the imaginary part.
-
-```python
-x = 10 + 5j
-print(x)  # Output: (10+5j)
-```
-
-
-
-### Sequence Types
-
-1. list -> list is a collection which is ordered and changeable. Allows duplicate members.
-
-```python
-x = ["apple", "banana", "cherry"]
-print(x)  # Output: ['apple', 'banana', 'cherry']
-```
-
-2. tuple -> tuple is a collection which is ordered and unchangeable. Allows duplicate members.
-
-```python
-x = ("apple", "banana", "cherry")
-print(x)  # Output: ('apple', 'banana', 'cherry')
-```
-
-3. range -> range is a built-in function that returns a sequence of numbers, starting from 0 by default, and increments by 1 (by default), and stops before a specified number.
-
-```python
-x = range(6)
-print(x)  # Output: range(0, 6)
-```
-
-4. string -> string is a collection of characters, enclosed in quotes.
-
-```python
-x = "Hello, World!"
-print(x)  # Output: Hello, World!
-```
-
-
-### Boolean Types
-
-
-1. Boolean -> Boolean is a data type that can have two possible values: True or False.
-
-```python
-x = True
-print(x)  # Output: True
-```
-
-```python
-x = False
-print(x)  # Output: False
-```
-
-
-
-
-### Set Types
-
-1. set -> set is a collection which is unordered, unchangeable, and unindexed. No duplicate members.
-
-```python
-x = {"apple", "banana", "cherry"}
-print(x)  # Output: {'apple', 'banana', 'cherry'}
-```
-
-
-### Dictionary Types
-
-1. dictionary -> dictionary is a collection which is unordered, changeable and indexed. No duplicate members.
-
-```python
-x = {"name": "John", "age": 30}
-print(x)  # Output: {'name': 'John', 'age': 30}
-```
-
-
-
-### Binary Types
-
-1. bytes -> bytes are arrays of bytes, immutable.
-
-```python
-x = b"Hello"
-print(x)  # Output: b'Hello'
-```
-
-2. bytearray -> bytearray is an array of bytes. It has the same functionality as a list.
-
-```python
-x = bytearray(5)
-print(x)  # Output: bytearray(b'\x00\x00\x00\x00\x00')
-```
-
-3. memoryview -> memoryview is a view into a bytes or bytearray object, and it allows for writing to and reading from it.
-
-```python
-x = memoryview(bytes(5))
-print(x)  # Output: memoryview(b'\x00\x00\x00\x00\x00')
-```
-
+### Key Differences
+- **Performance**:
+  - List and Tuple: Accessing elements is fast. Tuple can be slightly faster than List due to immutability.
+  - Dictionary: Optimized for retrieving values when the key is known. Slower for ordered operations.
+  - Set: Optimized for membership tests, union, intersection, and difference operations.
+- **Use Cases**:
+  - List: Ordered, modifiable collections.
+  - Tuple: Ordered collections that should not change.
+  - Dictionary: Key-value pairs for efficient data retrieval.
+  - Set: Collections ensuring unique elements with no specific order.
+- **Methods**:
+  - List: `append()`, `extend()`, `insert()`, `remove()`, `pop()`
+  - Tuple: `count()`, `index()`
+  - Dictionary: `keys()`, `values()`, `items()`, `get()`, `update()`
+  - Set: `add()`, `remove()`, `discard()`, `pop()`, `union()`, `intersection()`, `difference()`

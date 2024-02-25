@@ -1,5 +1,7 @@
 # LearnPython
 
+![alt text](image.png)
+
 ## Table of Contents
 
 0. [Python Introduction](./introduction.md)
