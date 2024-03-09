@@ -8,6 +8,7 @@ This is a simple bank application.
 5. Exit
 
 '''
+
 import json
 
 ACCOUNTS_FILE = "accounts.json"
@@ -25,12 +26,10 @@ def save_accounts(accounts):
     with open(ACCOUNTS_FILE, 'w') as file:
         json.dump(accounts, file, indent=2)
 
-
 def create_account(accounts, account_number, account_holder):
     accounts[account_number] = {"holder": account_holder, "balance": 0}
     save_accounts(accounts)
     print("Account created successfully.")
-
 
 def deposit(accounts, account_number, amount):
     if account_number in accounts:
@@ -51,7 +50,6 @@ def withdraw(accounts, account_number, amount):
             print("Invalid withdrawal amount or insufficient funds.")
     else:
         print("Account not found.")
-
 
 def check_balance(accounts, account_number):
     if account_number in accounts:

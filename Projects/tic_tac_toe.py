@@ -1,8 +1,6 @@
 # create a tic tac toe game for me 
 
 
-
-
 def free_positions(board):
     positions = []
     for i,row in enumerate(board):
@@ -18,8 +16,7 @@ def check_winner(board, player):
     for row in board:
         isTrue =  row[0] == row[1]  == row[2]  == player
         if isTrue:
-            return True
-        
+            return True   
     v1 =  board[0][0] == board[1][0] == board[2][0] == player
     v2 =  board[0][1] == board[1][1] == board[2][1] == player
     v3 = board[0][2] == board[1][2] == board[2][2] == player
