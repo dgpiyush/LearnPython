@@ -79,40 +79,40 @@
 
 # d1 = Developer('john', 29, 'FD')
 
-class Person:
-    def __init__(self, name, age):
-        self.__name = name
-        self.__age = age
-    def display(self):
-        print(f"My name is {self.__name} and age is {self.__age}")
-    def get_name(self):
-        return self.__name
-    def set_name(self, name):
+# class Person:
+#     def __init__(self, name, age):
+#         self.__name = name
+#         self.__age = age
+#     def display(self):
+#         print(f"My name is {self.__name} and age is {self.__age}")
+#     def get_name(self):
+#         return self.__name
+#     def set_name(self, name):
       
-        print("name can not be numaric")
-        return
+#         print("name can not be numaric")
+#         return
     
-    def __add__(self, other):
-        # print(self.__age)
-        # print(other.__age)
-        return self.__age + other.__age
+#     def __add__(self, other):
+#         # print(self.__age)
+#         # print(other.__age)
+#         return self.__age + other.__age
 
-    def __sub__(self, other):
-        return self.__age - other.__age
+#     def __sub__(self, other):
+#         return self.__age - other.__age
     
-    def __eq__(self, other):
+#     def __eq__(self, other):
 
-        return self.__age ==  other.__age
+#         return self.__age ==  other.__age
     
-    def __str__(self) -> str:
-         return self.__name
+#     def __str__(self) -> str:
+#          return self.__name
 
-p1 = Person('user name',30)
-p2 = Person('dlf',90)
+# p1 = Person('user name',30)
+# p2 = Person('dlf',90)
 
-p3 = Person('dlf',30)
+# p3 = Person('dlf',30)
 
-print(str(p1))
+# print(str(p1))
 
 # print(p1.get_name())
 # p1.set_name("9")
@@ -127,5 +127,20 @@ print(str(p1))
 # tye
 
 
+
+
+
+
+
+class mylist(list):
+    def change(self):
+        self[:] = []
+    
+
+l = mylist([4,5])
+
+print(l)
+l.change()
+print(l)
 
 
