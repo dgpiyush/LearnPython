@@ -5,6 +5,7 @@ class Account:
         self.account_holder = account_holder
         self.account_number = account_number
         self.__balance = balance
+    
     @property
     def balance(self):
         print("getting balance")
