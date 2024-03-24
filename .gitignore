@@ -1,0 +1,12 @@
+# all the environments
+.env
+
+
+# sqlite databases
+*.db
+*.sqlite
+*.sqlite3
+
+
+# python environments
+env
