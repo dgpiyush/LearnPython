@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Todo App{% endblock %}
+
+{% block content %}
+
+
+
+
+
+  <h2>Todo List</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Sr.</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in todos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ todo.title }}</td>
+        <td>{{ todo.description }}</td>
+        <td>{{ todo.status }}</td>
+        <td>
+          <a href="{% url 'delete' todo.id %}">Delete</a> |
+          <a href="{% url 'edit' todo.id %}">Edit</a>
+        </td>
+      </tr>
+       {% empty %}
+      <tr>
+        <td colspan="4">No todos found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}

@@ -1,21 +1,54 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Todos
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
+from django.contrib import messages
 # Create your views here.
 
-def index(request):
-    
-    # create Todos
-    # Todos.objects.create(
-    #     title="hello 2",
-    #     description="hello description",
-    #     status="pending"
-    # )
+def index(request, **kwargs):
+    queryset = Todos.objects.all()
+    return render(request, 'todos.html', {'todos': queryset})
 
-    count =  Todos.objects.count()
-    print(count)
-    # for todo in queryset:
-    #     print(todo.title)
-    #     print(todo.status)
+def create(request):
+    return render(request, 'create.html')
 
-    return HttpResponse('heloo')
+def save(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        status = request.POST.get('status')
+        todo = Todos.objects.create(
+            title=title,
+            description=description,
+            status="pending"
+        )
+        todo.save()
+        messages.success(request, 'Todo created successfully')
+        return redirect('todos')
+    else:
+        return HttpResponse('Method not allowed. Use POST') 
+
+def delete(request, id):
+    todo = Todos.objects.get(id=id)
+    todo.delete()
+    messages.success(request, 'Todo deleted successfully')
+    return  redirect('todos')
+
+def edit(request, id):
+    todo = Todos.objects.get(id=id)
+    return render(request, 'edit.html', {'todo': todo})
+
+def update(request, id):
+    todo = Todos.objects.get(id=id)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        status = request.POST.get('status')
+        todo.title = title
+        todo.description = description
+        todo.status = status
+        todo.save()
+        messages.success(request, 'Todo updated successfully')
+        return redirect('todos')
+    else:
+        return HttpResponse('Method not allowed. Use POST')
+

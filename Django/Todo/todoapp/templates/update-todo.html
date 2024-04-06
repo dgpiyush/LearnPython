@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<form action="" method="POST" >
+    {% csrf_token %}
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" value='{{ todo.title }}'  >
+    <label for="text">Text:</label>
+    <textarea id="text" name="text" >{{ todo.desc }}</textarea>
+    <select name="status">
+        <option    disabled >Select Status</option>
+        <option value="Pending" {% if todo.status == 'Pending' %} selected {% endif %}  >Pending</option>
+        <option value="Completed" {% if todo.status == 'Completed' %} selected {% endif %} >Completed</option>
+    </select>
+    <input type="submit" value="Update Todo">
+  </form>  
+
+</body>
+</html>

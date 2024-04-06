@@ -1,6 +1,7 @@
 # all the environments
 .env
-
+.venv
+.venv
 
 # sqlite databases
 *.db
@@ -10,3 +11,5 @@
 
 # python environments
 env
+venv
+virtualenv
