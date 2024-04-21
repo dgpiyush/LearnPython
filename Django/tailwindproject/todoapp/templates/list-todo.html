@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div>
+    <a href="/todoapp/create" >
+    <button>  Create Todo </button>
+    </a>
+  </div>
+ <h1>  Todo List </h1>
+
+<table>
+    <tr>
+        <th>Sr.</th>
+        <th>Title</th>
+        <th>Desc</th>
+        <th>Action</th>
+    </tr>
+    
+{% for todo in todos %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ todo.title }}</td>
+        <td>{{ todo.desc }}</td>
+        <td>
+          <div>
+            <a href="/todoapp/update/{{ todo.id }}">
+            <button>Edit</button>
+            </a>
+            
+            <a href="/todoapp/delete/{{ todo.id }}">
+            <button>Delete</button>
+            </a>
+
+          </div>
+        </td>
+    </tr>
+{% endfor %}
+
+
+</table>
+
+</body>
+</html>

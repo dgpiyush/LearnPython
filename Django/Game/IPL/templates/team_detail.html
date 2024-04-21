@@ -1,0 +1,22 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+Teams
+{% endblock title %}
+
+{% block content %}
+<h3>Teams Detail</h3>
+
+
+
+{% for player in players %}
+
+<div class="card">
+<p>{{ player.name }}</p>
+<p>{{ player.number }}</p>
+<p>{{ player.team.name }}</p>
+</div>
+
+{% endfor %}
+
+{% endblock content %}

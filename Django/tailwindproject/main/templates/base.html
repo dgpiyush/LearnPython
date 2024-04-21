@@ -1,0 +1,20 @@
+{% load compress %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Home {% endblock title %} </title>
+      {% compress css %}
+    <link rel="stylesheet" href="{% static 'src/output.css' %}">
+    {% endcompress %}
+</head>
+<body>
+
+         <header>new header</header>
+    {% block content %} {% endblock content %}
+         <footer>footer</footer>
+    
+</body>
+</html>
