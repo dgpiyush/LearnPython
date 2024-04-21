@@ -1,13 +1,23 @@
-from django.shortcuts import render, HttpResponse
-from .models import Team, Player
+from django.shortcuts import render, HttpResponse, redirect
+from .models import Team, Player, Post
 # Create your views here.
 
 
 def index(request):
-    names = []
-    count_of_name = len(names)
-    return  render(request, 'index.html', {'value': "<script> alert('hello') </script>" })
+    post_query = Post.objects.all()
+    return  render(request, 'index.html', {'posts': post_query })
 
+
+def post_add(request):
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        post = Post(title=title, description=description)
+        post.save()
+        return redirect('/')
+
+    return render(request, 'post_add.html')
 
 def about(request):
     return render(request, 'about.html')

@@ -1,0 +1,27 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+Teams
+{% endblock title %}
+
+{% block content %}
+
+
+<form  method="POST">
+  {% csrf_token %}
+  <div>
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" required>
+  </div>
+  <div>
+    <label for="description">Description</label>
+    <textarea name="description" id="description" required></textarea>
+  </div>
+  <div>
+    <button type="submit">Create Post</button>
+  </div>
+</form>
+
+
+
+{% endblock content %}

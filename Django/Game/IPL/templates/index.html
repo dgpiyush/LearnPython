@@ -2,7 +2,23 @@
 
 
   {% block content %} 
-    <h1>this is home page content</h1>
+    <h1>List Of Post</h1>
+
+    <button> <a href="/posts/add/"> Add</a></button>
+
+
+    {% for post in  posts %}
+
+      <div class="post">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.description }}</p>
+        <small>{{ post.created_at|date }}</small>
+        <small>{{ post.updated_at|date }}</small>
+      </div>
+    
+    {% endfor %}
+
+
   {% endblock %}
 
 {% block title %}Home{% endblock %}
