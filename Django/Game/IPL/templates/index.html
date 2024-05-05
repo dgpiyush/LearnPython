@@ -14,6 +14,8 @@
         <p>{{ post.description }}</p>
         <small>{{ post.created_at|date }}</small>
         <small>{{ post.updated_at|date }}</small>
+        <button><a href="{% url 'delete_post' post.id %}">Delete</a></button>
+        <button><a href="{% url 'post_detail' post.id %}">View</a></button>
       </div>
     
     {% endfor %}

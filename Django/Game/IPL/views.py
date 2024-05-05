@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.urls import reverse
 from .models import Team, Player, Post
 # Create your views here.
 
@@ -6,6 +7,14 @@ from .models import Team, Player, Post
 def index(request):
     post_query = Post.objects.all()
     return  render(request, 'index.html', {'posts': post_query })
+
+
+
+def post_detail(request, id):
+
+    post = Post.objects.get(id=id)
+
+    return render(request, 'post_detail.html', {'post': post})
 
 
 def post_add(request):
@@ -27,10 +36,9 @@ def about(request):
 def teams(request):
 
     queryset =  Team.objects.all()
+    print(queryset.query)
 
     return render(request, 'teams.html', {'teams': queryset})
-
-
 
 def team_detail(request,id):
 
@@ -39,3 +47,11 @@ def team_detail(request,id):
     print(queryset)
 
     return render(request, 'team_detail.html', {'players': queryset})
+
+def delete_post(request, id):
+    post = Post.objects.get(id=id)
+    # post.delete()
+    print(reverse('post_detail',  kwargs={"id": post.id}))
+
+    return redirect(reverse('index'))
+
