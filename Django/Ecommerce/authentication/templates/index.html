@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block title %}Auth home{% endblock title %}
+
+
+{% block body %}
+
+<h1>Auth home</h1>
+
+<a href="{% url 'register' %}">
+<button > Register </button>
+</a>
+
+<a href="{% url 'login' %}">
+<button> Login </button>
+</a>
+<a href="{% url 'home' %}">
+<button> Home </button>
+</a>
+
+{% endblock body %}

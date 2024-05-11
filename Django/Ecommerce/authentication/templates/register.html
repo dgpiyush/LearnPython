@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block title %}Login{% endblock title %}
+
+
+{% block body %}
+
+
+<h1>Login</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="username">Username:</label><br>
+    <input type="text" name="username" id="username" placeholder="Username" required><br>
+
+    <label for="first_name">First Name:</label><br>
+    <input type="text" name="first_name" id="first_name" placeholder="First Name" required><br>
+
+    <label for="last_name">Last Name:</label><br>
+    <input type="text" name="last_name" id="last_name" placeholder="Last Name" required><br>
+  
+    <label for="email">Email:</label><br>
+    <input type="email" name="email" id="email" placeholder="Email" required><br>
+
+    <label for="phone_number">Phone Number:</label><br>
+    <input type="tel" name="phone_number" id="phone_number" placeholder="Phone Number" required><br>
+  
+    <label for="password">Password:</label><br>
+    <input type="password" name="password" id="password" placeholder="Password" required><br>
+
+    <label for="c_password">Confirm Password:</label><br>
+    <input type="password" name="c_password" id="c_password" placeholder="Confirm Password" required><br>
+    
+    <input type="submit" value="Register" />
+
+</form>
+
+{% endblock body %}
