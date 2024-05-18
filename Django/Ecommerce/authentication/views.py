@@ -160,3 +160,25 @@ def get_user_or_none(username):
         return user
     except:
         return None
+    
+
+
+@login_required(login_url='login')
+def change_password(request):
+    if request.method == 'POST':
+        old_password = request.POST.get('old_password')
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+
+        # validate old password
+        if not request.user.check_password(old_password):
+            return render(request,'change_password.html',{'error':'Old password is incorrect'})
+
+        if new_password == confirm_password:
+            request.user.set_password(new_password)
+            request.user.save()
+            return redirect('login')
+
+            
+        
+    return render(request,'change_password.html')
