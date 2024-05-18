@@ -1,11 +1,17 @@
 from django.db import models
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    class Meta:
+        verbose_name_plural = 'Categories'
 
     def __str__(self):
         return self.name
+
+
 
 
 class Product(models.Model):
@@ -18,3 +24,17 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
+class WhishList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return self.user.first_name
+
+    class Meta:
+        verbose_name_plural = 'WhishLists'
+        verbose_name = 'WhishList'

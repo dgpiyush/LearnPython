@@ -9,12 +9,22 @@
 
 <h1>Login</h1>
 
+{% if error %}
+<p class="text-danger">{{ error }}</p>
+{% endif %}
+
 <form method="post">
     {% csrf_token %}
     <input type="text" name="username" placeholder="User Name" />
     <input type="password" name="password" placeholder="Password" />
     <input type="submit" value="Login" />
 
+    <a href="{% url 'forgot' %}"> Forgot Password </a>
+
 </form>
+
+
+
+
 
 {% endblock body %}

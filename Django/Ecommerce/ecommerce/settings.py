@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'authentication',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -143,3 +144,16 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-relay.brevo.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'biz.piyushmishra@gmail.com'
+EMAIL_HOST_PASSWORD = 'Q5cpOFEPvzSJdfXD'
+
+
+# user model
+AUTH_USER_MODEL = 'authentication.CustomUser'

@@ -14,3 +14,6 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(store_models.Product, ProductAdmin)
 
 admin.site.register(store_models.Category)
+
+
+admin.site.register(store_models.WhishList)
