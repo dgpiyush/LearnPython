@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-gfz8b&$4^1o!y7*2id7i-0@ye(mtmoh!+z=buw)zb#%%tu$n1-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.91','127.0.0.1']
 
 
 # Application definition
@@ -37,12 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 3rd party
+    'debug_toolbar',
+
+    # local
     'store',
     'authentication',
+
 ]
 
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,6 +57,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+INTERNAL_IPS = [
+  
+    "127.0.0.1",
+    
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
