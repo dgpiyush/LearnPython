@@ -1,3 +1,4 @@
+
 .products-container{
     display: flex;
     flex-wrap: wrap;
@@ -5,7 +6,6 @@
     align-items: center;
     margin-top: 50px;
 }
-
 .product-card{
     display: flex;
     flex-direction: column;
@@ -21,4 +21,7 @@
     height: 400px;
     background-color: #bab9b9;
 }
+
+
+
 

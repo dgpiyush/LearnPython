@@ -1,0 +1,58 @@
+{% extends "base/dashboard-base.html" %}
+
+
+{% block title %}Address{% endblock title %}
+
+
+{% block content %}
+
+
+<div class="mb-3">
+    <div>
+       
+        <a href="{% url 'address_create' %}"><button class="btn btn-primary"> <i class="ri-add-circle-line"></i> Add Address</button></a>
+    </div>
+</div>
+
+
+
+{% for address in  addresses %}
+
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ address.user.first_name }} {{ address.user.last_name }}</h5>
+        <p class="card-text">
+            {{ address.address_line_1 }}<br>
+            {% if address.address_line_2 %}
+                {{ address.address_line_2 }}<br>
+            {% endif %}
+            {{ address.city }}<br>
+            {{ address.state }}<br>
+            {{ address.country }}<br>
+            {{ address.pincode }}<br>
+            {% if address.mobile %}
+            {{ address.mobile }}<br>
+            {% endif %}
+
+            {% if address.email %}
+            {{ address.email }}
+            {% endif %}
+
+        </p>
+
+        <a href="{% url 'address_edit' address.id %}"><button class="btn btn-primary">Edit</button></a>
+        <a href="{% url 'address_delete' address.id %}"><button class="btn btn-danger">Delete</button></a>
+    </div>
+</div>
+
+
+{% empty %}
+
+  <h1>No Address</h1>
+
+{% endfor %}
+
+
+
+{% endblock %}

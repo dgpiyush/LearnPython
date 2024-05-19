@@ -17,3 +17,11 @@ admin.site.register(store_models.Category)
 
 
 admin.site.register(store_models.WhishList)
+
+
+
+class AddressAdmin(admin.ModelAdmin):
+    list_display = ['user', 'city', 'state','country','pincode']
+    autocomplete_fields = ['user']
+
+admin.site.register(store_models.Address, AddressAdmin)

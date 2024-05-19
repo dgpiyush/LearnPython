@@ -38,3 +38,20 @@ class WhishList(models.Model):
     class Meta:
         verbose_name_plural = 'WhishLists'
         verbose_name = 'WhishList'
+
+
+
+
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    address_line_1 = models.CharField(max_length=255)
+    address_line_2 = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
+    pincode = models.CharField(max_length=255)
+    mobile = models.CharField(max_length=255, null=True)
+    email = models.EmailField(max_length=255, null=True)
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name} - {self.address_line_1}"

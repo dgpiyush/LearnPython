@@ -1,0 +1,91 @@
+{% extends "base/dashboard-base.html" %}
+
+
+{% block title %}Address{% endblock title %}
+
+
+{% block content %}
+
+{% if address  %}
+ <h1>Edit Address</h1>
+<form action="{% url 'address_edit' address.id %}" method="POST" class="form ">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="address_line_1" class="form-label">Address Line 1</label>
+        <input type="text" class="form-control" id="address_line_1" name="address_line_1" value="{{ address.address_line_1 }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="address_line_2" class="form-label">Address Line 2 (optional)</label>
+        <input type="text" class="form-control" id="address_line_2" name="address_line_2" value="{% if address.address_line_2 %}{{ address.address_line_2 }}{% endif %}">
+    </div>
+    <div class="mb-3">
+        <label for="city" class="form-label">City</label>
+        <input type="text" class="form-control" id="city" name="city" value="{{ address.city }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="state" class="form-label">State</label>
+        <input type="text" class="form-control" id="state" name="state" value="{{ address.state }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input type="text" class="form-control" id="country" name="country" value="{{ address.country }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="pincode" class="form-label">Pincode</label>
+        <input type="text" class="form-control" id="pincode" name="pincode" value="{{ address.pincode }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile (optional)</label>
+        <input type="text" class="form-control" id="mobile" name="mobile" value="{% if address.mobile %}{{ address.mobile }} %}{% endif %}">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email (optional)</label>
+        <input type="email" class="form-control" id="email" name="email" value="{% if address.email %}{{ address.email }}{% endif %}">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+{% else %}
+   <h1>Add Address</h1>
+    <form  method="POST" class="form">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="address_line_1" class="form-label">Address Line 1</label>
+        <input type="text" class="form-control" id="address_line_1" name="address_line_1"  required>
+    </div>
+    <div class="mb-3">
+        <label for="address_line_2" class="form-label">Address Line 2 (optional)</label>
+        <input type="text" class="form-control" id="address_line_2" name="address_line_2" >
+    </div>
+    <div class="mb-3">
+        <label for="city" class="form-label">City</label>
+        <input type="text" class="form-control" id="city" name="city"  required>
+    </div>
+    <div class="mb-3">
+        <label for="state" class="form-label">State</label>
+        <input type="text" class="form-control" id="state" name="state"  required>
+    </div>
+    <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input type="text" class="form-control" id="country" name="country"  required>
+    </div>
+    <div class="mb-3">
+        <label for="pincode" class="form-label">Pincode</label>
+        <input type="text" class="form-control" id="pincode" name="pincode"  required>
+    </div>
+    <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile (optional)</label>
+        <input type="text" class="form-control" id="mobile" name="mobile" >
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email (optional)</label>
+        <input type="email" class="form-control" id="email" name="email" >
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endif %}
+
+
+
+
+{% endblock %}

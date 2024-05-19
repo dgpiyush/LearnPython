@@ -52,8 +52,16 @@
 </nav>
 </header>
 
+
 <main class="container min-h">
-    {% block content %}{% endblock %}
+  <div class="mt-4 d-flex" style="gap: 0.8rem;">
+    <div class="sidebar" >
+      {% include "includes/dashboard/sidebar.html" %}
+    </div>
+    <div class="content" style="flex: 1">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
 </main>
 
 
