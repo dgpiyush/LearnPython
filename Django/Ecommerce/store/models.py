@@ -5,6 +5,7 @@ User = settings.AUTH_USER_MODEL
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='category/', null=True)
     class Meta:
         verbose_name_plural = 'Categories'
 
@@ -16,6 +17,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='product/', null=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     categegory = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
