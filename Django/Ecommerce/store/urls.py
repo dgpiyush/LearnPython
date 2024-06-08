@@ -9,6 +9,9 @@ urlpatterns = [
    
     path('category/<int:category_id>/', views.category, name='category'),
 
+    # product detail page
+    path('product/<int:product_id>/', views.product_detail, name='product_detail'),
+
     # basic routes
     path('about/', views.about, name='about'),
     path('faq/', views.faq, name='faq'),
@@ -20,4 +23,12 @@ urlpatterns = [
     path('dashboard/address/edit/<int:address_id>/', views.address_edit, name='address_edit'),
     path('dashboard/address/delete/<int:address_id>/', views.address_delete, name='address_delete'),
     path('dashboard/address/create/', views.address_create, name='address_create'),
+
+
+
+    # cart
+    path('cart', views.cart, name='cart'),
+    path('add-to-cart/<int:product_id>', views.add_to_cart, name='add_to_cart'),
+    path('remove-from-cart/<int:product_id>', views.remove_from_cart, name='remove_from_cart'),
+    path('update-cart-item/<int:product_id>', views.update_cart_item, name='update_cart_item'),
 ]

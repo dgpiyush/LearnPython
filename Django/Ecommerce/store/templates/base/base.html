@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,11 +10,15 @@
     href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
     rel="stylesheet"
 />
+
+<link rel="stylesheet" href="{% static "k.css" %}">
 <style>
     .min-h{
         min-height: 60vh;
     }
 </style>
+
+ {% block style %}{% endblock style %}
 </head>
 <body>
 
@@ -37,6 +42,11 @@
       {% if request.user.is_authenticated %}
             <div class="m-2">    
                 <a href="{% url "dashboard" %}"><button class="btn btn-outline-success" type="submit"><i class="ri-user-fill"></i></button></a>
+            </div>
+
+
+            <div class="m-2">    
+                <a href="{% url "cart" %}"><button class="btn btn-outline-success" type="submit"><i class="ri-shopping-cart-fill"></i></button></a>
             </div>
 
         {% else %}

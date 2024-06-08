@@ -29,7 +29,7 @@ def login_view(request):
             if(callback_url): 
                 return redirect(callback_url)
             
-            return redirect('home')
+            return redirect('dashboard')
         else:
             return  render(request,'login.html',{'error':'Invalid credentials'})
 

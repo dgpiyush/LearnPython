@@ -1,0 +1,120 @@
+{% extends "base/base.html" %}
+
+{% block title %}Cart{% endblock title %}
+
+{% block style %}
+
+
+<style>
+        .categories{
+             display: grid;
+             grid-template-columns: repeat(1, 1fr);
+             gap: 1rem;
+        }
+
+        .category{ 
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background-color: #f5f5f5;
+
+            padding: 1rem;
+
+            border-radius: 0.5rem;
+
+        }
+
+
+        .category img{ 
+
+            width: 200px;
+            height: 200px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+        }
+
+        .category h2{
+
+            font-size: 1.5rem;
+
+        }
+
+        .category button { 
+
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .checkout-btn{
+            width: 100%;
+            background-color: #007bff;
+            padding: 2rem;
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+        }
+
+</style>
+
+
+{% endblock style %}
+
+{% block content %}
+
+
+
+ <h1>Cart  -  {{ cart.cart_id }}</h1>
+
+ <div class="categories">
+
+{% for cart_product in cart_products %}
+
+    <div class="category">
+        {% if cart_product.product.image %}
+        <img src="{{ cart_product.product.image.url }}" alt="">
+        {% endif %}
+        <h2>{{ cart_product.product.name }}</h2>
+        <div class="d-flex">
+        <a class="m-2" href="{% url 'update_cart_item' cart_product.product.id    %}?inc=1">
+        <button>Increment</button>
+        </a>
+        <h2 class="m-2">{{ cart_product.quantity }}</h2>
+        <a class="m-2" href="{% url 'update_cart_item' cart_product.product.id    %}?dcr=1">
+        <button>Decrement</button>
+        </a>
+        </div>
+
+        {% comment %} <a class="m-2 btn btn-danger" href="{% url 'remove_from_cart' cart_product.product.id  %}">
+        <p class="m-2">Remove</p>
+        </a> {% endcomment %}
+    </div>
+
+
+
+
+
+{% empty %}
+    <h1>Cart is empty</h1>
+
+{% endfor %}
+
+
+
+    {% if cart_products.count %}
+    <div>
+        <button class="checkout-btn"> Checkout</button>
+    </div>
+    {% endif %}
+
+</div>
+
+
+{% endblock content %}

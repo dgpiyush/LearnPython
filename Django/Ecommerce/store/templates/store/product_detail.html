@@ -1,0 +1,117 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+
+
+{% block title %}Product Detail{% endblock title %}
+
+
+{% block style %}
+
+<style>
+
+body{
+    background-color: #f5f5f5;
+}
+
+.product-detail{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+   
+}
+
+.product-detail img{
+    width: 100; 
+}
+
+.product-detail .product-info{
+    flex: 1;
+}
+
+
+.price{ 
+    font-weight: bold;
+}
+
+.card-title{
+    font-weight: bold;
+    font-size: 1.5rem;
+
+}
+
+.btns{
+    width: 100%;
+    background-color: #007bff;
+    padding: 2rem;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.card-footer{
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+    .product-detail{
+        flex-direction: column;
+    }
+}
+</style>
+
+{% endblock style %}
+
+
+
+
+
+
+{% block content %}
+
+
+
+    <div class="product-detail mb-3">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" class="card-img-top" alt="...">
+        {% else %}
+
+        <img src="{% static "img/placeholder.jpg" %}" class="card-img-top" alt="...">
+        {% endif %}
+        <div class="card-body">
+            <div>
+                <h5 class="card-title text-center">{{ product.name }}</h5>
+                <p class="price text-center">Price:{{ product.price }}</p>
+                <p class="card-text mt-4 text-center">{{ product.description }}</p>
+            </div>
+
+             <div class="card-footer">
+
+           
+                <a href="{% url "add_to_cart" product.id %}">
+                <button class="btns">Add to cart</button>
+                </a>
+           
+        </div>
+        </div>
+
+       
+    </div>
+
+
+
+
+{% endblock content %}
+
