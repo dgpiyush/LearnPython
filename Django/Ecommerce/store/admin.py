@@ -33,3 +33,8 @@ admin.site.register(store_models.Address, AddressAdmin)
 
 admin.site.register(store_models.Cart)
 admin.site.register(store_models.CartProduct)
+
+
+
+admin.site.register(store_models.Order)
+admin.site.register(store_models.OrderProduct)

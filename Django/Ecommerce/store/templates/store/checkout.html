@@ -1,0 +1,129 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% load multiply %}
+
+{% block title %}Cart{% endblock title %}
+
+{% block style %}
+
+
+<style>
+
+    .checkout{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .product-list{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .product-card{
+        width: 100%;
+        gap: 1rem;
+        background-color: #f5f5f5;
+        text-align: center;
+        padding: 1rem;
+        border-radius: 0.5rem;
+    }
+
+    .product-card img {
+        width: 300px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        border-radius: 0.5rem;
+    }
+
+
+
+
+       
+</style>
+
+
+{% endblock style %}
+
+{% block content %}
+ <h1>Checkout</h1>
+    <div class="checkout">
+ <div class="left">
+ <div class="product-list">
+
+    {% for cart_product in cart_products %}
+
+        <div class="product-card">
+
+            {% if cart_product.product.image %}
+            <img src="{{ cart_product.product.image.url }}" alt="Product Image" class="product-image">
+            {% else %}
+            <img src="{% static 'img/placeholder.jpg' %}" alt="Product Image" class="product-image">
+            {% endif %}
+
+            <h2>{{ cart_product.product.name }}</h2>
+            <h2>{{ cart_product.product.price }} X {{ cart_product.quantity }}  = {{ cart_product.product.price |multiply:cart_product.quantity }} </h2>
+
+
+        </div>
+
+    
+    {% endfor %}
+
+ </div>
+ </div>
+ <div class="right">
+
+    <div class="total">
+        <h2>Cart Total: {{ cart_products_count }}</h2>
+        <h2>Total: {{ cart_products_total }}</h2>
+    </div>
+
+
+
+     <form class="form" method='POST'>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="firstname" class="form-label">First Name</label>
+            <input required type="text" class="form-control" id="firstname" name="firstname">
+        </div>
+        <div class="mb-3">
+            <label for="lastname" class="form-label">Last Name</label>
+            <input required type="text" class="form-control" id="lastname" name="lastname">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea required class="form-control" id="address" name="address"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="postal_code" class="form-label">Postal Code</label>
+            <input required type="text" class="form-control" id="postal_code" name="postal_code">
+        </div>
+        <div class="mb-3">
+            <label for="mobile" class="form-label">Mobile </label>
+            <input required type="text" class="form-control" id="mobile" name="mobile">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email (optional)</label>
+            <input  type="email" class="form-control" id="email" name="email">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+
+
+
+
+
+ </div>
+ </div>
+
+
+
+{% endblock content %}

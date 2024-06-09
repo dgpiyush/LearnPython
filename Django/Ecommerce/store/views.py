@@ -1,8 +1,51 @@
+from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Address, Category, Product, Cart, CartProduct
+from .models import Address, Category, Order, OrderProduct, Product, Cart, CartProduct
 from django.shortcuts import redirect
 from django.urls import reverse
+import razorpay
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+
+from django.db.transaction import atomic
+
+import json
+
+
+
+
+razorpay_client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+
+
+
+def test(request):
+    
+    currency = 'INR'
+    amount = 200*100  # Rs. 200
+ 
+
+    razorpay_order = razorpay_client.order.create(dict(amount=amount,
+                                                       currency=currency,
+                                                       payment_capture='0'))
+ 
+    # order id of newly created order.
+    razorpay_order_id = razorpay_order['id']
+    callback_url = '/paymenthandler/'
+
+
+    print(razorpay_order_id)
+
+ 
+    # we need to pass these details to frontend.
+    context = {}
+    context['razorpay_order_id'] = razorpay_order_id
+    context['razorpay_merchant_key'] = settings.RAZOR_KEY_ID
+    context['razorpay_amount'] = amount
+    context['currency'] = currency
+    context['callback_url'] = callback_url
+ 
+    return render(request, 'store/test.html', context)
 
 
 def about(request):
@@ -100,6 +143,38 @@ def address_create(request):
 
     return render(request, 'store/dashboard/address_form.html',{'address':None})
 
+@login_required(login_url='login')
+def my_address(request):
+
+    address_queryset = Address.objects.filter(user=request.user)
+
+    address = list(address_queryset)
+
+    address = [ {
+        'id':a.id,
+        'address_line_1':a.address_line_1,
+        'address_line_2':a.address_line_2,
+        'city':a.city,
+        'state':a.state,
+        'country':a.country,
+        'pincode':a.pincode,
+        'mobile':a.mobile,
+        'email':a.email
+    } for a in address]
+
+    return  HttpResponse(json.dumps(address))
+
+
+
+
+
+
+@login_required(login_url='login')
+def orders(request):
+
+    order_queryset = Order.objects.filter(user=request.user)
+
+    return render(request, 'store/dashboard/orders.html',{'orders':order_queryset})
 
 @login_required(login_url='login')
 def cart(request):
@@ -173,4 +248,186 @@ def update_cart_item(request, product_id):
     
 
 
+@login_required(login_url='login')
+@atomic
+def checkout(request):
+
+    user = request.user
+    cart, created = Cart.objects.get_or_create(user=user)
+
+    cart_products = CartProduct.objects.filter(cart=cart)
+    cart_products_count = cart_products.count()
+    cart_products_total = 0 
+
+    for cart_product in cart_products:
+        cart_products_total += cart_product.product.price * cart_product.quantity
+
+
+
+
+    if request.method == 'POST':
+        first_name = request.POST.get('firstname')
+        last_name = request.POST.get('lastname')
+        address = request.POST.get('address')
+        postalcode = request.POST.get('postal_code')
+        mobile = request.POST.get('mobile')
+        email = request.POST.get('email', '')
+
+
+        order = Order.objects.create(
+            user=user,
+            name = f'{first_name} {last_name}',
+            address = address,
+            postal_code = postalcode,
+            mobile = mobile,
+            email = email,
+            total = cart_products_total
+        )
+
+
+        for cart_product in cart_products:
+            OrderProduct.objects.create(
+                order = order,
+                product = cart_product.product,
+                price = cart_product.product.price,
+                quantity = cart_product.quantity
+            )
+        
+
+        # clear cart and cart products
+        cart_products.delete()
+        cart.delete()
+
+
+        return redirect('/payment/?order_id={}'.format(order.id))
+    
+
+      
+    context = {}
+
+    context['cart']  = cart
+    context['cart_products']  = cart_products
+    context['cart_products_count']  = cart_products_count
+    context['cart_products_total']  = cart_products_total
+
+    return render(request, 'store/checkout.html',context)
+
+
+
+def payment(request):
+    
+    order_id = request.GET.get('order_id')
+
+    order = Order.objects.get(id=order_id)
+
+    total_amount  = int(order.total*100)
+
+
+
+    razorpay_order = razorpay_client.order.create(dict(amount=total_amount,
+                                                       currency='INR',
+                                                       payment_capture='0'))
+    
+
+    order.rzp_order_id = razorpay_order['id']
+    order.save()
+    
+
+    context = {}
+    context['razorpay_order_id'] = razorpay_order['id']
+    context['razorpay_merchant_key'] = settings.RAZOR_KEY_ID
+    context['razorpay_amount'] = total_amount
+    context['currency'] = 'INR'
+    context['callback_url'] = '/paymenthandler/'
+
+
+
+
+    return render(request, 'store/payment.html', context)
+  
+    
+
+
+  
+
+
+
+
+
+
+
+@csrf_exempt
+def paymenthandler(request):
+ 
+    # only accept POST request.
+    if request.method == "POST":
+
+        # try:
+            # get the required parameters from post request.
+        payment_id = request.POST.get('razorpay_payment_id', '')
+        razorpay_order_id = request.POST.get('razorpay_order_id', '')
+        signature = request.POST.get('razorpay_signature', '')
+
+
+
+        params_dict = {
+            'razorpay_order_id': razorpay_order_id,
+            'razorpay_payment_id': payment_id,
+            'razorpay_signature': signature
+        }
+
+        print(razorpay_order_id,'razorpay_order_id')
+
+        # verify the payment signature.
+        result = razorpay_client.utility.verify_payment_signature(
+            params_dict)
+        
+
+        if result is not None:
+
+            order = Order.objects.filter(rzp_order_id=razorpay_order_id).first()
+
+            print(order,'order')
+
+            amount = int(order.total*100)  # Rs. 200
+            # try:
+
+            # capture the payemt
+            razorpay_client.payment.capture(payment_id, amount)
+
+
+            order.is_paid = True
+            order.rzp_order_id = razorpay_order_id
+            order.rzp_payment_id = payment_id
+            order.rzp_signature_id = signature
+            order.save()
+
+                # render success page on successful caputre of payment
+            return render(request, 'store/paymentsuccess.html')
+                # except:
+ 
+                #     # if there is an error while capturing payment.
+                #     return render(request, 'store/paymentfail.html')
+        else:
+ 
+            #     # if signature verification fails.
+            return render(request, 'store/paymentfail.html')
+        # except:
+ 
+            # if we don't find the required parameters in POST data
+            return HttpResponse('BadRequest')
+    else:
+       # if other than POST request is made.
+        return HttpResponse('Invalid request')
+
+        
+
+
+
+
    
+
+   
+
+    
+

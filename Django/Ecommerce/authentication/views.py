@@ -16,6 +16,7 @@ def index(request):
 
 def login_view(request):
     if request.method == 'POST':
+
         username= request.POST.get('username')
         password = request.POST.get('password')
         callback_url = request.GET.get('next')

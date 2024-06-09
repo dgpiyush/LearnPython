@@ -64,6 +64,7 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
     def __str__(self):
         return self.user.first_name
     
@@ -76,3 +77,34 @@ class CartProduct(models.Model):
 
     def __str__(self):
         return f"{self.cart.user.first_name} - {self.product.name}"
+
+
+class Order(models.Model):
+    ORDER_STATUS =  [('Pending', 'Pending'),('Dispatched', 'Dispatched'),('Delivered', 'Delivered'), ('Cancelled', 'Cancelled')]
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    address = models.CharField(max_length=255)
+    postal_code = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    mobile = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255, null=True, blank=True)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=255, default='Pending', choices=ORDER_STATUS)
+    rzp_order_id = models.CharField(max_length=255, null=True, blank=True)
+    rzp_payment_id = models.CharField(max_length=255, null=True, blank=True)
+    rzp_signature_id = models.CharField(max_length=255, null=True, blank=True)
+    is_paid = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.user.first_name
+    
+class OrderProduct(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.order.user.first_name} - {self.product.name}"

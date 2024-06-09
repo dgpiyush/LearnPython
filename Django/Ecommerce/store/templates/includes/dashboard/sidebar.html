@@ -31,7 +31,8 @@
             
            
             <li>
-                <a href="#" class="nav-link link-dark">
+                <a href='{% url "my_orders" %}' class="nav-link {% if request.path == '/dashboard/orders/' %}
+                    active {% else %} link-dark  {% endif %}">
                     <svg class="bi me-2" width="16" height="16">
                         <use xlink:href="#table"></use>
                     </svg>

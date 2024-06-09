@@ -24,6 +24,10 @@ urlpatterns = [
     path('dashboard/address/delete/<int:address_id>/', views.address_delete, name='address_delete'),
     path('dashboard/address/create/', views.address_create, name='address_create'),
 
+    path('dashboard/orders/', views.orders, name='my_orders'),
+
+    path('my-address', views.my_address, name='my_address'),
+
 
 
     # cart
@@ -31,4 +35,13 @@ urlpatterns = [
     path('add-to-cart/<int:product_id>', views.add_to_cart, name='add_to_cart'),
     path('remove-from-cart/<int:product_id>', views.remove_from_cart, name='remove_from_cart'),
     path('update-cart-item/<int:product_id>', views.update_cart_item, name='update_cart_item'),
+
+
+    # checkout 
+    path('checkout', views.checkout, name='checkout'),
+    path('payment/', views.payment, name='payment'),
+
+    # test payment url 
+    path('test/', views.test, name='test'),
+    path('paymenthandler/', views.paymenthandler, name='paymenthandler'),
 ]

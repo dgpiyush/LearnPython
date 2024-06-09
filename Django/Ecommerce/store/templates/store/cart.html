@@ -110,7 +110,7 @@
 
     {% if cart_products.count %}
     <div>
-        <button class="checkout-btn"> Checkout</button>
+       <a href="{% url 'checkout' %}"><button class="checkout-btn"> Checkout</button></a> 
     </div>
     {% endif %}
 
