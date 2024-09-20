@@ -42,7 +42,7 @@
 | Type      | Syntax  | Ordered | Mutable | Duplicates | Example                                          |
 |-----------|---------|---------|---------|------------|--------------------------------------------------|
 | Dictionary| `{}`    | As of Python 3.7, Yes | Yes | No keys, but values can be duplicated | `{'key1': 1, 'key2': 2, 'key3': 3}` |
-| Set       | `{}`    | No      | Yes     | Not allowed| `{1, 2, 3}`                                      |
+| Set       | `{}`,set()    | No      | Yes     | Not allowed| `{1, 2, 3}`                                      |
 
 ---
 
